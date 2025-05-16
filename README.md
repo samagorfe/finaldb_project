@@ -1,4 +1,4 @@
-# 💻 Tech Startup Database Console
+# Tech Startup Database Console
 
 A web-based database console built for a fictional tech startup, enabling structured storage, analytics, and operational insights into company data.
 
