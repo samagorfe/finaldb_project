@@ -2,11 +2,11 @@
 
 A web-based database console built for a fictional tech startup, enabling structured storage, analytics, and operational insights into company data.
 
-👉 [Click here to open the console](http://127.0.0.1:5000) ← *(replace with live URL if deployed)*
+ [Click here to open the console](http://127.0.0.1:5000) ← *(replace with live URL if deployed)*
 
 ---
 
-## 🧩 Problem Description
+## Problem Description
 
 This database was designed for a **tech startup** that collaborates with external vendors, marketing teams, and partner companies. It needed a secure, scalable solution to manage operations, team members, products, and clients.
 
@@ -19,7 +19,7 @@ This project involved:
 
 ---
 
-## ⚠️ Challenges Faced
+## Challenges Faced
 
 - Translating ER/EER diagrams into a working schema
 - Modeling complex relationships
@@ -29,7 +29,7 @@ This project involved:
 
 ---
 
-## ❓ Project Questions
+## Project Questions
 
 **1. Five Rules likely used in the company:**
 - A team member cannot supervise more than 10 people.
@@ -46,19 +46,19 @@ This project involved:
 
 ---
 
-## 🧠 ER Diagram
+## ER Diagram
 
 ![ER Diagram](report/ER%20Diagram.png)
 
 ---
 
-## 🧠 EER Diagram
+## EER Diagram
 
 ![EER Diagram](report/EER%20Diagram%20from%20Lucidchart%20(2).png)
 
 ---
 
-## 📘 Assumptions
+## Assumptions
 
 - All people (employees, candidates, customers) are in one `UserProfile` table.
 - A person can have multiple roles.
@@ -68,7 +68,7 @@ This project involved:
 
 ---
 
-## 📦 Relational Schema (Simplified)
+## Relational Schema (Simplified)
 
 <details>
 <summary>Click to expand schema</summary>
@@ -530,6 +530,15 @@ WHERE C.PartName = 'Cup'
   AND CAST(REPLACE(A.Weight, 'lb', '') AS DECIMAL) < 4
 ORDER BY TPP.UnitCost ASC
 LIMIT 1;
+
+## Logical Design
+
+![Logical Design](report/Logical%20Design.png)
+
+
+## Dependency Diagram
+
+![Dependency Diagram](report/depdency%20diagram.png)
 
 
 
