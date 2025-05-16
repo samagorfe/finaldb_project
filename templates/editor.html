@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <h2>Live SQL Editor</h2>
+
+  <form method="POST" action="/editor">
+    <textarea name="sql" class="form-control mb-3" rows="6" placeholder="Type your SQL query here...">{{ sql }}</textarea>
+    <button type="submit" class="btn btn-success">Run Query</button>
+  </form>
+
+  {% if error %}
+  <div class="alert alert-danger mt-3">{{ error }}</div>
+  {% endif %}
+
+  {% if results %}
+  <h5 class="mt-4">Results:</h5>
+  <table class="table table-bordered table-sm mt-2">
+    <thead class="table-light">
+      <tr>
+        {% for header in headers %}
+        <th>{{ header }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in results %}
+      <tr>
+        {% for item in row %}
+        <td>{{ item }}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+<a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+{% endblock %}

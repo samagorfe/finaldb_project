@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Views</h2>
+<p>Loaded {{ views|length }} views.</p>
+<ul class="list-group mb-3">
+    {% for view in views %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ view }}
+        <form method="POST" action="/run_query" class="m-0">
+            <input type="hidden" name="sql" value="SELECT * FROM {{ view }}">
+            <button type="submit" class="btn btn-sm btn-primary">Run</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% if not views %}
+<p class="text-muted mt-3">No views found in the database.</p>
+{% endif %}
+<a href="/" class="btn btn-secondary">Back to Home</a>
+{% endblock %}

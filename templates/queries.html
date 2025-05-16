@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Predefined Queries</h2>
+<p>Loaded {{ queries|length }} queries.</p>
+<ul class="list-group mb-3">
+    {% for query in queries %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ query.description }}
+        <form method="POST" action="/run_query" class="m-0">
+            <input type="hidden" name="sql" value="{{ query.sql }}">
+            <button type="submit" class="btn btn-sm btn-primary">Run</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% if not queries %}
+<p class="text-muted">No queries available.</p>
+{% endif %}
+<a href="/" class="btn btn-secondary">Back to Home</a>
+{% endblock %}

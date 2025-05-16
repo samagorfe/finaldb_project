@@ -1,0 +1,151 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 Database Design\
+\
+
+\f1\b0 USERPROFILE (\
+    UserProfileID INT PRIMARY KEY,\
+    Name VARCHAR(100),\
+    Age INT CHECK (Age < 65),\
+    Gender VARCHAR(10),\
+    Address VARCHAR(200)\
+)\
+\
+TEAMMEMBER (\
+    UserProfileID INT PRIMARY KEY,\
+    Rank VARCHAR(50),\
+    Title VARCHAR(50),\
+    FOREIGN KEY (UserProfileID) REFERENCES USERPROFILE(UserProfileID)\
+)\
+\
+DIVISION (\
+    DivisionID INT PRIMARY KEY,\
+    DeptName VARCHAR(100)\
+)\
+\
+ROLEPOSTING (\
+    JobID INT PRIMARY KEY,\
+    JobDesc VARCHAR(200),\
+    PostedDate DATE,\
+    DivisionID INT,\
+    FOREIGN KEY (DivisionID) REFERENCES DIVISION(DivisionID)\
+)\
+\
+APPLICATION (\
+    UserProfileID INT,\
+    JobID INT,\
+    PRIMARY KEY (UserProfileID, JobID),\
+    FOREIGN KEY (UserProfileID) REFERENCES USERPROFILE(UserProfileID),\
+    FOREIGN KEY (JobID) REFERENCES ROLEPOSTING(JobID)\
+)\
+\
+INTERVIEW (\
+    InterviewID INT PRIMARY KEY,\
+    CandidateID INT,\
+    InterviewerID INT,\
+    JobID INT,\
+    InterviewTime TIMESTAMP,\
+    Grade INT CHECK (Grade BETWEEN 0 AND 100),\
+    FOREIGN KEY (CandidateID) REFERENCES USERPROFILE(UserProfileID),\
+    FOREIGN KEY (InterviewerID) REFERENCES TEAMMEMBER(UserProfileID),\
+    FOREIGN KEY (JobID) REFERENCES ROLEPOSTING(JobID)\
+)\
+\
+SALARYPAYMENT (\
+    EmployeeID INT,\
+    TransactionNo INT,\
+    PayDate DATE,\
+    Amount DECIMAL(10,2),\
+    PRIMARY KEY (EmployeeID, TransactionNo),\
+    FOREIGN KEY (EmployeeID) REFERENCES TEAMMEMBER(UserProfileID)\
+)\
+\
+ASSIGNEDTO (\
+    UserProfileID INT,\
+    DivisionID INT,\
+    PRIMARY KEY (UserProfileID, DivisionID),\
+    FOREIGN KEY (UserProfileID) REFERENCES USERPROFILE(UserProfileID),\
+    FOREIGN KEY (DivisionID) REFERENCES DIVISION(DivisionID)\
+)\
+\
+APP (\
+    AppID INT PRIMARY KEY,\
+    AppType VARCHAR(50),\
+    ListPrice DECIMAL(10,2),\
+    Size VARCHAR(50),\
+    Weight VARCHAR(50),\
+    Style VARCHAR(50)\
+)\
+\
+COMPONENT (\
+    ComponentID INT PRIMARY KEY,\
+    PartName VARCHAR(100),\
+    Description VARCHAR(200)\
+)\
+\
+APPPART (\
+    AppID INT,\
+    ComponentID INT,\
+    Quantity INT,\
+    PRIMARY KEY (AppID, ComponentID),\
+    FOREIGN KEY (AppID) REFERENCES APP(AppID),\
+    FOREIGN KEY (ComponentID) REFERENCES COMPONENT(ComponentID)\
+)\
+\
+TECHPARTNER (\
+    TechPartnerID INT PRIMARY KEY,\
+    Name VARCHAR(100),\
+    Address VARCHAR(200),\
+    AccountNo VARCHAR(50),\
+    CreditRating INT,\
+    WebServURL VARCHAR(100)\
+)\
+\
+TECHPARTNERPART (\
+    TechPartnerID INT,\
+    ComponentID INT,\
+    UnitType VARCHAR(50),\
+    PRIMARY KEY (TechPartnerID, ComponentID),\
+    FOREIGN KEY (TechPartnerID) REFERENCES TECHPARTNER(TechPartnerID),\
+    FOREIGN KEY (ComponentID) REFERENCES COMPONENT(ComponentID)\
+)\
+\
+LAUNCHPLATFORM (\
+    SiteID INT PRIMARY KEY,\
+    SiteName VARCHAR(100),\
+    SiteLocation VARCHAR(100)\
+)\
+\
+SUBSCRIPTION (\
+    SubscriptionID INT PRIMARY KEY,\
+    SubscriptionsUserProfileID INT,\
+    CustomerID INT,\
+    AppID INT,\
+    SiteID INT,\
+    FOREIGN KEY (SubscriptionsUserProfileID) REFERENCES TEAMMEMBER(UserProfileID),\
+    FOREIGN KEY (CustomerID) REFERENCES USERPROFILE(UserProfileID),\
+    FOREIGN KEY (AppID) REFERENCES APP(AppID),\
+    FOREIGN KEY (SiteID) REFERENCES LAUNCHPLATFORM(SiteID)\
+)\
+\
+CONTAINS (\
+    SubscriptionID INT,\
+    AppID INT,\
+    PRIMARY KEY (SubscriptionID, AppID),\
+    FOREIGN KEY (SubscriptionID) REFERENCES SUBSCRIPTION(SubscriptionID),\
+    FOREIGN KEY (AppID) REFERENCES APP(AppID)\
+)\
+\
+WORKSAT (\
+    UserProfileID INT,\
+    SiteID INT,\
+    PRIMARY KEY (UserProfileID, SiteID),\
+    FOREIGN KEY (UserProfileID) REFERENCES USERPROFILE(UserProfileID),\
+    FOREIGN KEY (SiteID) REFERENCES LAUNCHPLATFORM(SiteID)\
+)\
+}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- SQL Editor Section -->
+<div class="card p-4 mb-4 shadow-sm" style="background-color: rgba(255,255,255,0.85);">
+  <h2 class="mb-3">Run a SQL Query</h2>
+  <form method="POST" action="/run_query">
+    <textarea name="sql" class="form-control mb-3" rows="4" placeholder="Type your SQL here...">{{ sql }}</textarea>
+    <button type="submit" class="btn btn-success">Run Query</button>
+  </form>
+
+  <!-- Dashboard Button (with spacing) -->
+  <a href="/dashboard" class="btn btn-outline-dark w-100 mt-5 py-3 fw-semibold shadow-sm">
+    View Dashboard Analytics
+  </a>
+</div>
+
+<!-- ✅ THIS IS WHERE SPACING GOES -->
+<!-- Show All Buttons Section -->
+<div class="mt-5"> <!-- This adds top margin between editor and cards -->
+  <div class="row g-4">
+    <div class="col-md-4">
+      <a href="/tables" class="text-decoration-none">
+        <div class="card nav-highlight text-center p-4 h-100">
+          <h5 class="text-black fw-semibold">Show All Tables</h5>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="/views" class="text-decoration-none">
+        <div class="card nav-highlight text-center p-4 h-100">
+          <h5 class="text-black fw-semibold">Show All Views</h5>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="/queries" class="text-decoration-none">
+        <div class="card nav-highlight text-center p-4 h-100">
+          <h5 class="text-black fw-semibold">Show All Queries</h5>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
