@@ -68,6 +68,17 @@ This project involved:
 
 ---
 
+
+## Logical Design
+
+![Logical Design](report/Logical%20Design.png)
+
+## Dependency Diagram
+
+![Dependency Diagram](report/depdency%20diagram.png)
+
+---
+
 ## Relational Schema (Simplified)
 
 <details>
@@ -530,15 +541,3 @@ WHERE C.PartName = 'Cup'
   AND CAST(REPLACE(A.Weight, 'lb', '') AS DECIMAL) < 4
 ORDER BY TPP.UnitCost ASC
 LIMIT 1;
-
-## Logical Design
-
-![Logical Design](report/Logical%20Design.png)
-
-
-## Dependency Diagram
-
-![Dependency Diagram](report/depdency%20diagram.png)
-
-
-
